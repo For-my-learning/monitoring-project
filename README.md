@@ -22,15 +22,17 @@ bash scripts/collect_metrics.sh
 
 Phoenix サーバを起動
 
+```bash
 cd monitoring
 mix deps.get
-export NOTIFIER_WEBHOOK_URL="https://hooks.slack.com/services/XXXXX/XXXXX/XXXXX"
+export NOTIFIER_WEBHOOK_URL=""https://hooks.slack.com/services/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
+
 mix phx.server
+```
 
 2. ブラウザでアクセス
 
 - http://localhost:4000/
-
 
 -    /metrics で JSON データを確認可能
 
@@ -40,26 +42,26 @@ mix phx.server
 3. Docker で実行
 
 - イメージビルド
-
+```bash
 cd monitoring
 docker build -t monitoring-app .
+```
 
-
-コンテナ起動（データディレクトリをマウント）
-
+- コンテナ起動（データディレクトリをマウント）
+```bash
 docker run -p 4000:4000 \
   -v ~/monitoring-project/data:/app/../data \
   -e NOTIFIER_WEBHOOK_URL="https://hooks.slack.com/services/XXXXX/XXXXX/XXXXX" \
   monitoring-app
+```
 
+- ブラウザで http://localhost:4000/ にアクセス可能
 
-ブラウザで http://localhost:4000/ にアクセス可能
+- metrics.json はホスト側に保存され、リアルタイムに反映
 
-metrics.json はホスト側に保存され、リアルタイムに反映
+4. Cron で定期収集（推奨）
 
-Cron で定期収集（推奨）
-
-毎分 metrics.json を更新する例：
-
+- 毎分 metrics.json を更新する例：
+bash```
 * * * * * /home/$USERNAME/monitoring-project/scripts/collect_metrics.sh >> /home/$USERNAME/monitoring-project/logs/metrics.log 2>&1
-
+```
