@@ -1,22 +1,4 @@
-# Monitoring
-
-To start your Phoenix server:
-
-* Run `mix setup` to install and setup dependencies
-* Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-* Official website: https://www.phoenixframework.org/
-* Guides: https://hexdocs.pm/phoenix/overview.html
-* Docs: https://hexdocs.pm/phoenix
-* Forum: https://elixirforum.com/c/phoenix-forum
-* Source: https://github.com/phoenixframework/phoenix
-# Monitoring Project (Mini)
+# Monitoring Project 
 
 ## 概要
 Linux サーバの CPU、メモリ、ディスク使用量、最新エラー情報を収集し、Web API で確認できるとともに、閾値を超えた場合に Slack に通知するシステム。
@@ -44,19 +26,19 @@ mix deps.get
 export NOTIFIER_WEBHOOK_URL="https://hooks.slack.com/services/XXXXX/XXXXX/XXXXX"
 mix phx.server
 
-ブラウザでアクセス
+2. ブラウザでアクセス
 
-http://localhost:4000/
-
-
-/metrics で JSON データを確認可能
-
-/ で簡易ダッシュボード表示
+- http://localhost:4000/
 
 
-Docker で実行
+-    /metrics で JSON データを確認可能
 
-イメージビルド
+-    / で簡易ダッシュボード表示
+
+
+3. Docker で実行
+
+- イメージビルド
 
 cd monitoring
 docker build -t monitoring-app .
@@ -78,5 +60,5 @@ Cron で定期収集（推奨）
 
 毎分 metrics.json を更新する例：
 
-* * * * * /home/youruser/monitoring-project/scripts/collect_metrics.sh >> /home/youruser/monitoring-project/logs/metrics.log 2>&1
+* * * * * /home/$USERNAME/monitoring-project/scripts/collect_metrics.sh >> /home/$USERNAME/monitoring-project/logs/metrics.log 2>&1
 
