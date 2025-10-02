@@ -61,7 +61,8 @@ docker run -p 4000:4000 \
 
 4. Cron で定期収集（推奨）
 
-- 毎分 metrics.json を更新する例：
-bash```
+毎分 metrics.json を更新する例：
+
+```bash
 * * * * * /home/$USERNAME/monitoring-project/scripts/collect_metrics.sh >> /home/$USERNAME/monitoring-project/logs/metrics.log 2>&1
 ```
