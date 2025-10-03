@@ -8,6 +8,10 @@ Linux サーバの CPU、メモリ、ディスク使用量、最新エラー情�
 - Slack Webhook による閾値通知
 - Docker 化でどこでも同じ環境で実行可能
 
+ホスト LinuxのBashスクリプト ->  JSON生成
+Dockerコンテナ内のElixir読み込み(starting phx.server)
+閾値を超えた場合に -> Slack通知 & ダッシュボード表示
+
 ---
 
 ---
@@ -20,7 +24,7 @@ Linux サーバの CPU、メモリ、ディスク使用量、最新エラー情�
 bash scripts/collect_metrics.sh
 ```
 
-Phoenix サーバを起動
+2 . Phoenix サーバを起動
 
 ```bash
 cd monitoring
@@ -30,7 +34,7 @@ export NOTIFIER_WEBHOOK_URL=""https://hooks.slack.com/services/T09J0TFJQET/B09J0
 mix phx.server
 ```
 
-2. ブラウザでアクセス
+ブラウザでアクセス
 
 - http://localhost:4000/
 
@@ -39,15 +43,15 @@ mix phx.server
 -    / で簡易ダッシュボード表示
 
 
-3. Docker で実行
+3. Docker 実行
 
-- イメージビルド
+イメージビルド
 ```bash
 cd monitoring
 docker build -t monitoring-app .
 ```
 
-- コンテナ起動（データディレクトリをマウント）
+コンテナ起動（データディレクトリをマウント）
 ```bash
 docker run -p 4000:4000 \
   -v ~/monitoring-project/data:/app/../data \
